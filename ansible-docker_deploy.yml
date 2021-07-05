@@ -1,0 +1,22 @@
+---
+ - name: Deploy Docker File
+   hosts: servers
+   tasks:
+     - name: Pull Latest image
+       command: docker pull manuprathappj/test
+
+     - name: Get infos on container
+       docker_container_info:
+         name: test
+       register: result
+
+     - name: Stop current running container
+       command: docker kill test
+       when: result.exists and result.container['State']['Status'] == 'running'
+
+     - name: remove docker container
+       command: docker container rm test
+       when: result.exists
+
+     - name: Start Container with latest image
+       command: docker run -d --name test -p 8090:8080  manuprathappj/test:latest
