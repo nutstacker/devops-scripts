@@ -13,10 +13,5 @@
          src: /tmp/hello-world-war.war
          dest: /root/apache-tomcat-10.0.6/webapps/hello-world-war.war
 
-     - name: download war
-       get_url:
-         url: http://localhost:8081/artifactory/example-repo-local/my/jar/1.0/hello-world-war.war
-         dest: /root/apache-tomcat-10.0.6/webapps/
-
      - name: Start Tomcat
        shell: nohup  /root/apache-tomcat-10.0.6/bin/startup.sh
