@@ -6,7 +6,7 @@
        shell: /root/apache-tomcat-10.0.6/bin/shutdown.sh
 
      - name: Delete old war
-       command: rm -rf /root/apache-tomcat-10.0.6/webapps/
+       command: rm -rf /root/apache-tomcat-10.0.6/webapps/*
        
      - name: Copy the war file
        copy:
