@@ -1,0 +1,17 @@
+---
+ - name: Deploy War
+   hosts: servers
+   tasks:
+     - name: Stop Tomcat
+       shell: /root/apache-tomcat-10.0.6/bin/shutdown.sh
+
+     - name: Delete old war
+       command: rm -rf /root/apache-tomcat-10.0.6/webapps/
+
+     - name: download war
+       get_url:
+         url: http://localhost:8081/artifactory/example-repo-local/my/jar/1.0/hello-world-war.war
+         dest: /root/apache-tomcat-10.0.6/webapps/
+
+     - name: Start Tomcat
+       shell: nohup  /root/apache-tomcat-10.0.6/bin/startup.sh
